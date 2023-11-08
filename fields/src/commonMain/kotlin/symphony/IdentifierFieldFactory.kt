@@ -11,7 +11,7 @@ fun Fields<*>.email(
     name: KMutableProperty0<String?>,
     label: String = name.name,
     hint: String = label,
-    visibility: Visibility = Visibility.Visible,
+    visibility: Visibility = Visibilities.Visible,
     onChange: Changer<String>? = null,
     factory: ValidationFactory<String>? = null
 ) = text(name, label, visibility, hint, onChange) {
@@ -23,7 +23,7 @@ fun Fields<*>.phone(
     name: KMutableProperty0<PhoneOutput?>,
     label: String = name.name,
     hint: String = label,
-    visibility: Visibility = Visibility.Visible,
+    visibility: Visibility = Visibilities.Visible,
     country: Country? = name.get()?.country,
     filter: (Country, key: String) -> Boolean = { c, key -> c.matches(key)},
     onChange: Changer<PhoneOutput>? = null,
