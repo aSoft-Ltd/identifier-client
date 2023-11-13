@@ -50,7 +50,7 @@ abstract class LegalEntityFormScene(
             else -> individualForm(it.country, entity as? IndividualPresenter)
         }
     }.finally {
-        ui.value = it.toLazyState { onRetry { load(uid, loader) } }
+        ui.value = it.toLazyState()
     }
 
     fun switchToCorporateForm() {
