@@ -14,16 +14,15 @@ import symphony.Feedbacks
 import symphony.Label
 import symphony.Option
 import symphony.PhoneField
-import symphony.PhoneFieldState
 import symphony.PhoneOutput
+import symphony.SearchBy
 import symphony.Visibility
 import symphony.toErrors
 import symphony.toWarnings
-import kotlin.reflect.KMutableProperty0
 
 @PublishedApi
 internal class PhoneFieldImpl(
-    private val property: KMutableProperty0<PhoneOutput?>,
+    private val backer: FieldBacker<PhoneOutput?>,
     label: String,
     private val filter: (Country, key: String) -> Boolean,
     visibility: Visibility,
@@ -42,8 +41,10 @@ internal class PhoneFieldImpl(
 
     override fun setBody(value: String?) = setBody(value?.toLongOrNull())
 
-    private fun setValidateAndNotify(s: State) {
-        property.set(s.output)
+    override fun setBody(value: Int?) = setBody(value?.toLong())
+
+    private fun setValidateAndNotify(s: PhoneFieldStateImpl) {
+        backer.asProp?.set(s.output)
         val res = validator.validate(s.output)
         state.value = s.copy(feedbacks = Feedbacks(res.toWarnings()))
         onChange?.invoke(s.output)
@@ -67,33 +68,21 @@ internal class PhoneFieldImpl(
 
     private fun Country.toOption(selected: Boolean) = Option(label, code, selected)
 
-    private val initial = State(
-        name = property.name,
+    private val initial = PhoneFieldStateImpl(
+        name = backer.name,
         label = Label(label, this.validator.required),
         visibility = visibility,
         hint = hint,
+        key = "",
+        searchBy = SearchBy.Filtering,
         required = this.validator.required,
-        country = property.get()?.country ?: country,
-        option = (property.get()?.country ?: country)?.toOption(true),
-        body = property.get()?.body,
+        country = backer.asProp?.get()?.country ?: country,
+        option = (backer.asProp?.get()?.country ?: country)?.toOption(true),
+        body = backer.asProp?.get()?.body,
         countries = Country.values().toIList(),
         feedbacks = Feedbacks(iEmptyList()),
     )
 
-    data class State(
-        override val name: String,
-        override val label: Label,
-        override val visibility: Visibility,
-        override val hint: String,
-        override val required: Boolean,
-        override val countries: List<Country>,
-        override val option: Option?,
-        override val country: Country?,
-        override val body: Long?,
-        override val feedbacks: Feedbacks
-    ) : PhoneFieldState {
-        override val output get() = if (country != null && body != null) PhoneOutput(country, body) else null
-    }
 
     override val state by lazy { mutableLiveOf(initial) }
 
@@ -101,25 +90,42 @@ internal class PhoneFieldImpl(
 
     override val countries: List<Country> by lazy { Country.values().toIList() }
 
-    override fun searchByFiltering(key: String?) {
-        state.value = state.value.copy(
-            countries = if (key.isNullOrEmpty()) countries else countries.filter { filter(it, key) }
-        )
+    override fun setSearchBy(sb: SearchBy) {
+        val s = state.value.searchBy
+        if (s == sb) return
+        state.value = state.value.copy(searchBy = s)
     }
 
-    override fun searchByOrdering(key: String?) {
-        state.value = state.value.copy(
-            countries = if (key.isNullOrEmpty()) {
-                countries
-            } else {
+    override fun setSearchByFiltering() = setSearchBy(SearchBy.Filtering)
+
+    override fun setSearchByOrdering() = setSearchBy(SearchBy.Ordering)
+
+    override fun search() {
+        val key = state.value.key
+        val found = if (key.isEmpty()) countries else when (state.value.searchBy) {
+            SearchBy.Filtering -> countries.filter { filter(it, key) }
+            SearchBy.Ordering -> {
                 val partitions = countries.partition { filter(it, key) }
                 (partitions.first + partitions.second).toIList()
             }
-        )
+        }
+        state.value = state.value.copy(countries = found)
     }
 
-    override fun clearSearch() {
-        state.value = state.value.copy(countries = countries)
+    override fun appendSearchKey(key: String?) = setSearchKey(state.value.key + (key ?: ""))
+
+    override fun clearSearchKey() = setSearchKey("")
+
+    override fun backspaceSearchKey(): String {
+        val key = state.value.key
+        if (key.isEmpty()) return ""
+        return setSearchKey(key.dropLast(1))
+    }
+
+    override fun setSearchKey(key: String?): String {
+        val k = key ?: ""
+        state.value = state.value.copy(key = k)
+        return k
     }
 
     override fun setVisibility(v: Visibility) {
@@ -157,5 +163,9 @@ internal class PhoneFieldImpl(
     override val feedbacks get() = state.value.feedbacks
     override val body get() = state.value.body
     override val country get() = state.value.country
-    override val name get() = property.name
+    override val name get() = backer.name
+
+    override val key get() = state.value.key
+
+    override val searchBy get() = state.value.searchBy
 }

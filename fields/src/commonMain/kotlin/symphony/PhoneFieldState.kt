@@ -7,7 +7,7 @@ import geo.Country
 import kollections.List
 import kotlin.js.JsExport
 
-interface PhoneFieldState : FieldState<PhoneOutput> {
+interface PhoneFieldState : FieldState<PhoneOutput>, SearchableState {
     val name: String
     val label: Label
     val countries : List<Country>

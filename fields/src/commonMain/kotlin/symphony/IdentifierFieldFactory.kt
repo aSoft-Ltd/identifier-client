@@ -6,6 +6,7 @@ import neat.ValidationFactory
 import symphony.internal.PhoneFieldImpl
 import symphony.validators.email
 import kotlin.reflect.KMutableProperty0
+import symphony.internal.FieldBacker
 
 fun Fields<*>.email(
     name: KMutableProperty0<String?>,
@@ -29,5 +30,5 @@ fun Fields<*>.phone(
     onChange: Changer<PhoneOutput>? = null,
     factory: ValidationFactory<PhoneOutput>? = null
 ): PhoneField = getOrCreate(name) {
-    PhoneFieldImpl(name, label, filter, visibility, hint, country, onChange, factory)
+    PhoneFieldImpl(FieldBacker.Prop(name), label, filter, visibility, hint, country, onChange, factory)
 }
