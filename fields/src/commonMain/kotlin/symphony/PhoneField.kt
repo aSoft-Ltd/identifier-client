@@ -5,7 +5,8 @@ package symphony
 
 import geo.Country
 import kollections.List
-import kotlin.js.JsExport
+import kotlinx.JsExport
+import kotlinx.JsExportIgnore
 import kotlin.js.JsName
 
 interface PhoneField : Field<PhoneOutput,PhoneFieldState>, PhoneFieldState, Searchable {
@@ -24,9 +25,9 @@ interface PhoneField : Field<PhoneOutput,PhoneFieldState>, PhoneFieldState, Sear
 
     fun setBody(value: String?)
 
-    @JsExport.Ignore
+    @JsExportIgnore
     fun setBody(long: Long?)
 
-    @JsExport.Ignore
+    @JsExportIgnore
     fun setBody(value: Int?)
 }

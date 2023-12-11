@@ -6,7 +6,7 @@ package identifier
 import geo.GeoLocation
 import kollections.toIList
 import krono.LocalDate
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class IndividualPresenter(
     override val src: IndividualDto,

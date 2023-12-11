@@ -4,7 +4,7 @@
 package symphony
 
 import geo.Country
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class PhoneOutput(
     val country: Country,

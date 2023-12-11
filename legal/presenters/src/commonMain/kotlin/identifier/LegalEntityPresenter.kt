@@ -4,7 +4,7 @@
 package identifier
 
 import geo.GeoLocation
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed class LegalEntityPresenter {
     abstract val src: LegalEntityDto

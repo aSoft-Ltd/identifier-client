@@ -4,7 +4,7 @@
 package identifier
 
 import kollections.toIList
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class ContactPresenter(
     val src: ContactDto,

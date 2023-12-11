@@ -5,7 +5,7 @@ package identifier.fields
 
 import identifier.LegalEntityPresenter
 import symphony.Fields
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed class LegalEntityFields<O : Any>(initial: O) : Fields<O>(initial) {
     abstract val entity: LegalEntityPresenter?

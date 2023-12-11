@@ -21,7 +21,7 @@ import symphony.phone
 import symphony.selectSingle
 import symphony.text
 import symphony.toOption
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class CorporateFields(
     override val entity: CorporatePresenter?,

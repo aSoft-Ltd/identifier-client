@@ -18,7 +18,7 @@ import symphony.selectSingle
 import symphony.text
 import symphony.phone
 import symphony.toOption
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class IndividualFields(
     override val entity: IndividualPresenter?,

@@ -4,7 +4,7 @@
 package identifier
 
 import geo.GeoLocation
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class CorporateBranchPresenter(
     val src: CorporateBranchDto,

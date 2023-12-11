@@ -4,7 +4,7 @@
 package identifier
 
 import krono.LocalDate
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class CorporatePresenter(
     override val src: CorporateDto,
