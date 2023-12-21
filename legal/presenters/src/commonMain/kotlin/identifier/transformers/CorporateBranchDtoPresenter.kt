@@ -4,6 +4,7 @@ import identifier.ContactDto
 import identifier.ContactPresenter
 import identifier.CorporateBranchDto
 import identifier.CorporateBranchPresenter
+import kollections.map
 
 fun CorporateBranchDto.toPresenter() = CorporateBranchPresenter(
     src = this,

@@ -3,8 +3,9 @@
 
 package identifier
 
-import kollections.toIList
 import kotlinx.JsExport
+import kollections.List
+import kollections.filterIsInstance
 
 data class ContactPresenter(
     val src: ContactDto,
@@ -20,6 +21,6 @@ data class ContactPresenter(
     val role: String?,
     val isPrimary: Boolean,
 ) {
-    val emails get() = comms.filterIsInstance<UserEmail>().toIList()
-    val phones get() = comms.filterIsInstance<UserPhone>().toIList()
+    val emails get() = comms.filterIsInstance<UserEmail>()
+    val phones get() = comms.filterIsInstance<UserPhone>()
 }

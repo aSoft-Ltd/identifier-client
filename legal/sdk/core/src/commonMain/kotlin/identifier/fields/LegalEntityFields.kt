@@ -5,6 +5,7 @@ package identifier.fields
 
 import identifier.LegalEntityPresenter
 import symphony.Fields
+import kollections.listOf
 import kotlinx.JsExport
 
 sealed class LegalEntityFields<O : Any>(initial: O) : Fields<O>(initial) {

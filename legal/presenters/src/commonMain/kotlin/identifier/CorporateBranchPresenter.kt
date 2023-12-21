@@ -4,6 +4,7 @@
 package identifier
 
 import geo.GeoLocation
+import kollections.List
 import kotlinx.JsExport
 
 data class CorporateBranchPresenter(

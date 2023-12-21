@@ -4,6 +4,7 @@
 package identifier
 
 import krono.LocalDate
+import kollections.List
 import kotlinx.JsExport
 
 data class CorporatePresenter(

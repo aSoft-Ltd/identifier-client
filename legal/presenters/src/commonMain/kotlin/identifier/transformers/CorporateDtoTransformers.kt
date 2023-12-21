@@ -4,6 +4,8 @@ import identifier.CorporateDto
 import identifier.CorporatePresenter
 import identifier.params.CorporateParams
 import identifier.primaryContact
+import kollections.firstOrNull
+import kollections.map
 
 fun CorporateDto?.toParams() = CorporateParams(
     name = this?.name ?: "",

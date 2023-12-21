@@ -1,6 +1,7 @@
 package identifier
 
 import identifier.transformers.toPresenter
+import kollections.firstOrNull
 
 fun LegalEntityPresenter.toCorporate() = when (this) {
     is CorporatePresenter -> this

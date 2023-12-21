@@ -4,7 +4,8 @@
 package identifier
 
 import geo.GeoLocation
-import kollections.toIList
+import kollections.List
+import kollections.filterIsInstance
 import krono.LocalDate
 import kotlinx.JsExport
 
@@ -23,6 +24,6 @@ data class IndividualPresenter(
     val location: GeoLocation?,
     val address: String?
 ) : LegalEntityPresenter() {
-    val emails get() = comms.filterIsInstance<UserEmail>().toIList()
-    val phones get() = comms.filterIsInstance<UserPhone>().toIList()
+    val emails get() = comms.filterIsInstance<UserEmail>()
+    val phones get() = comms.filterIsInstance<UserPhone>()
 }

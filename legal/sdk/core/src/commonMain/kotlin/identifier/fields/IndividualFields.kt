@@ -4,21 +4,24 @@
 package identifier.fields
 
 import geo.Country
+import geo.location
 import identifier.DocumentType
 import identifier.Gender
 import identifier.IndividualPresenter
 import identifier.transformers.toOutput
+import kollections.minus
+import kollections.toList
+import kollections.toSet
+import kotlinx.JsExport
+import krono.date
 import neat.required
 import symphony.Option
-import krono.date
 import symphony.email
-import geo.location
 import symphony.name
+import symphony.phone
 import symphony.selectSingle
 import symphony.text
-import symphony.phone
 import symphony.toOption
-import kotlinx.JsExport
 
 class IndividualFields(
     override val entity: IndividualPresenter?,
@@ -55,14 +58,14 @@ class IndividualFields(
 
     val gender = selectSingle(
         name = output::gender,
-        items = Gender.values().toList(),
+        items = Gender.entries.toList(),
         mapper = { it.toOption() }
     )
 
     val idType = selectSingle(
         name = output::idType,
         label = "Id Type",
-        items = (DocumentType.values().toSet() - DocumentType.UNKNOWN),
+        items = (DocumentType.entries.toSet() - DocumentType.UNKNOWN),
         mapper = { Option(it.label, it.name) }
     )
 }

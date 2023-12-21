@@ -3,8 +3,14 @@ package symphony.internal
 import cinematic.mutableLiveOf
 import geo.Country
 import kollections.List
-import kollections.iEmptyList
-import kollections.toIList
+import kollections.emptyList
+import kollections.listOf
+import kollections.filter
+import kollections.find
+import kollections.map
+import kollections.partition
+import kollections.plus
+import kollections.toList
 import neat.ValidationFactory
 import neat.Validity
 import neat.custom
@@ -79,8 +85,8 @@ internal class PhoneFieldImpl(
         country = backer.asProp?.get()?.country ?: country,
         option = (backer.asProp?.get()?.country ?: country)?.toOption(true),
         body = backer.asProp?.get()?.body,
-        countries = Country.values().toIList(),
-        feedbacks = Feedbacks(iEmptyList()),
+        countries = Country.entries.toList(),
+        feedbacks = Feedbacks(emptyList()),
     )
 
 
@@ -88,12 +94,12 @@ internal class PhoneFieldImpl(
 
     override val option: Option? get() = this.country?.let(mapper)
 
-    override val countries: List<Country> by lazy { Country.values().toIList() }
+    override val countries: List<Country> by lazy { Country.entries.toList() }
 
     override fun setSearchBy(sb: SearchBy) {
         val s = state.value.searchBy
         if (s == sb) return
-        state.value = state.value.copy(searchBy = s)
+        state.value = state.value.copy(searchBy = sb)
     }
 
     override fun setSearchByFiltering() = setSearchBy(SearchBy.Filtering)
@@ -106,7 +112,7 @@ internal class PhoneFieldImpl(
             SearchBy.Filtering -> countries.filter { filter(it, key) }
             SearchBy.Ordering -> {
                 val partitions = countries.partition { filter(it, key) }
-                (partitions.first + partitions.second).toIList()
+                (partitions.first + partitions.second)
             }
         }
         state.value = state.value.copy(countries = found)
@@ -136,7 +142,7 @@ internal class PhoneFieldImpl(
         listOf(Option("Select ${state.value.label.capitalizedWithoutAstrix()}", ""))
     } else {
         emptyList()
-    } + countries.toList().map { mapper(it) }).toIList()
+    } + countries.toList().map { mapper(it) })
 
     override fun selectCountryOption(option: Option) {
         val country = countries.find { mapper(it).value == option.value }

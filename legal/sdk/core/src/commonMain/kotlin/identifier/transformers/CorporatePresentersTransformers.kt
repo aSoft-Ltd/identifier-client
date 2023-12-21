@@ -7,6 +7,7 @@ import identifier.fields.IndividualOutput
 import identifier.primaryContact
 import identifier.primaryEmail
 import identifier.primaryPhone
+import kollections.firstOrNull
 
 fun CorporatePresenter?.toOutput() = CorporateOutput(
     src = this,

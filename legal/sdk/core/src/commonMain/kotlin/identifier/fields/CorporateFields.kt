@@ -4,24 +4,26 @@
 package identifier.fields
 
 import geo.Country
+import geo.location
 import identifier.CorporatePresenter
 import identifier.CorporateType
 import identifier.Industry
 import identifier.transformers.toOutput
+import kollections.listOf
+import kollections.toList
+import kotlinx.JsExport
+import krono.date
 import neat.min
 import neat.required
 import symphony.Option
-import krono.date
 import symphony.email
 import symphony.filter
 import symphony.integer
-import geo.location
 import symphony.name
 import symphony.phone
 import symphony.selectSingle
 import symphony.text
 import symphony.toOption
-import kotlinx.JsExport
 
 class CorporateFields(
     override val entity: CorporatePresenter?,
@@ -33,7 +35,7 @@ class CorporateFields(
     val industry = selectSingle(
         name = output::industry,
         label = "Industry",
-        items = Industry.values().toList(),
+        items = Industry.entries.toList(),
         mapper = { it.toOption(it.label) },
         filter = { it, key -> it.filter(it.label, key) }
     )
@@ -41,7 +43,7 @@ class CorporateFields(
     val businessType = selectSingle(
         name = output::businessType,
         label = "Business Type",
-        items = CorporateType.values().toList(),
+        items = CorporateType.entries.toList(),
         mapper = { it.toOption(label = it.label) },
         filter = { it, key -> it.filter(it.label, key) }
     ) { required() }
