@@ -1,9 +1,10 @@
 package identifier.transformers
 
 import identifier.CorporateDto
-import identifier.IdentifierSettings
 import identifier.IndividualDto
 import identifier.LegalEntityDto
+import kollections.Collection
+import kollections.map
 
 fun LegalEntityDto.toPresenter() = when (this) {
     is CorporateDto -> toPresenter()
