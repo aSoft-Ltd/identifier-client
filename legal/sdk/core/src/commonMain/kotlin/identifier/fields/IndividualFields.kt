@@ -65,7 +65,7 @@ class IndividualFields(
     val idType = selectSingle(
         name = output::idType,
         label = "Id Type",
-        items = (DocumentType.entries.toSet() - DocumentType.UNKNOWN),
+        items = (DocumentType.values().toSet() - DocumentType.UNKNOWN).toSet(),
         mapper = { Option(it.label, it.name) }
     )
 }
