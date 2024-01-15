@@ -58,7 +58,7 @@ class IndividualFields(
 
     val gender = selectSingle(
         name = output::gender,
-        items = Gender.entries.toList(),
+        items = Gender.values().toList(),
         mapper = { it.toOption() }
     )
 

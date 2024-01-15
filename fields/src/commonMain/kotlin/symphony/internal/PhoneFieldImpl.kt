@@ -74,6 +74,8 @@ internal class PhoneFieldImpl(
 
     private fun Country.toOption(selected: Boolean) = Option(label, code, selected)
 
+    override val countries: List<Country> by lazy { Country.values().toList() }
+
     private val initial = PhoneFieldStateImpl(
         name = backer.name,
         label = Label(label, this.validator.required),
@@ -85,7 +87,7 @@ internal class PhoneFieldImpl(
         country = backer.asProp?.get()?.country ?: country,
         option = (backer.asProp?.get()?.country ?: country)?.toOption(true),
         body = backer.asProp?.get()?.body,
-        countries = Country.entries.toList(),
+        countries = countries,
         feedbacks = Feedbacks(emptyList()),
     )
 
@@ -93,8 +95,6 @@ internal class PhoneFieldImpl(
     override val state by lazy { mutableLiveOf(initial) }
 
     override val option: Option? get() = this.country?.let(mapper)
-
-    override val countries: List<Country> by lazy { Country.entries.toList() }
 
     override fun setSearchBy(sb: SearchBy) {
         val s = state.value.searchBy

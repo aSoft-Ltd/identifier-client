@@ -35,7 +35,7 @@ class CorporateFields(
     val industry = selectSingle(
         name = output::industry,
         label = "Industry",
-        items = Industry.entries.toList(),
+        items = Industry.values().toList(),
         mapper = { it.toOption(it.label) },
         filter = { it, key -> it.filter(it.label, key) }
     )
@@ -43,7 +43,7 @@ class CorporateFields(
     val businessType = selectSingle(
         name = output::businessType,
         label = "Business Type",
-        items = CorporateType.entries.toList(),
+        items = CorporateType.values().toList(),
         mapper = { it.toOption(label = it.label) },
         filter = { it, key -> it.filter(it.label, key) }
     ) { required() }
