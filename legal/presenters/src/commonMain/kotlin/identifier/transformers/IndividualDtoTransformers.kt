@@ -6,9 +6,6 @@ import identifier.params.IndividualParams
 import kollections.firstOrNull
 
 fun IndividualDto.toPresenter():IndividualPresenter {
-    println("toPresenter====");
-    println(address)
-    println(location)
     return IndividualPresenter(
         src = this,
         uid = uid,
@@ -22,7 +19,8 @@ fun IndividualDto.toPresenter():IndividualPresenter {
         idDocumentNumber = idDocumentNumber,
         idDocumentType = idDocumentType,
         location = location,
-        address = address
+        address = address,
+        verified = verified
     )
 }
 

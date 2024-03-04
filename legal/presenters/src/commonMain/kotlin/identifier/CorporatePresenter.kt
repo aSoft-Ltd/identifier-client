@@ -22,4 +22,5 @@ data class CorporatePresenter(
     val industry: Industry?,
     override val gid: String,
     val type: CorporateType,
+    override val verified: Boolean = false,
 ) : LegalEntityPresenter()
