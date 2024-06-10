@@ -20,7 +20,10 @@ fun IndividualDto.toPresenter():IndividualPresenter {
         idDocumentType = idDocumentType,
         location = location,
         address = address,
-        verified = verified
+        verified = verified,
+        creditUsed = creditUsed,
+        creditAmount = creditUsed,
+        leadTime = leadTime
     )
 }
 

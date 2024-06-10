@@ -13,6 +13,9 @@ sealed class LegalEntityPresenter {
     abstract val name: String
     abstract val image: String?
     abstract val verified: Boolean
+    abstract val creditAmount: Double?
+    abstract val creditUsed: Double?
+    abstract val leadTime: Int?
 
     val asIndividual get() = this as? IndividualPresenter
 

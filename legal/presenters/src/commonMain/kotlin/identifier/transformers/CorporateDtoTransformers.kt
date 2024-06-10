@@ -38,5 +38,8 @@ fun CorporateDto.toPresenter() = CorporatePresenter(
     industry = industry,
     gid = gid,
     type = type,
-    verified = verified
+    verified = verified,
+    creditUsed = creditUsed,
+    creditAmount = creditUsed,
+    leadTime = leadTime
 )

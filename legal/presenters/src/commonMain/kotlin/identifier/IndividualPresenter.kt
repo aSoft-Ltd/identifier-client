@@ -24,6 +24,9 @@ data class IndividualPresenter(
     val idDocumentType: DocumentType?,
     val location: GeoLocation?,
     val address: String?,
+    override val creditAmount: Double? = null,
+    override val creditUsed: Double? = null,
+    override val leadTime: Int? = null,
 ) : LegalEntityPresenter() {
     val emails get() = comms.filterIsInstance<UserEmail>()
     val phones get() = comms.filterIsInstance<UserPhone>()

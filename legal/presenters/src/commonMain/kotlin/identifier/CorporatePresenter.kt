@@ -23,4 +23,7 @@ data class CorporatePresenter(
     override val gid: String,
     val type: CorporateType,
     override val verified: Boolean = false,
+    override val creditAmount: Double? = null,
+    override val creditUsed: Double? = null,
+    override val leadTime: Int? = null,
 ) : LegalEntityPresenter()
