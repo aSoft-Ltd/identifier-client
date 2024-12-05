@@ -16,5 +16,6 @@ fun IndividualOutput.toParams() = catching {
         idDocumentType = idType,
         location = location,
         address = address,
+        additionalInfo = additionalInfo.toInfo()
     )
 }

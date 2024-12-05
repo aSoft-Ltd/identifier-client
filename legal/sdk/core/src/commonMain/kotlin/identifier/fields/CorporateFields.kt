@@ -9,12 +9,14 @@ import identifier.CorporatePresenter
 import identifier.CorporateType
 import identifier.Industry
 import identifier.transformers.toOutput
+import kollections.List
 import kollections.listOf
 import kollections.toList
 import kotlinx.JsExport
 import krono.date
 import neat.min
 import neat.required
+import symphony.Field
 import symphony.Option
 import symphony.email
 import symphony.filter
@@ -27,8 +29,13 @@ import symphony.toOption
 
 class CorporateFields(
     override val entity: CorporatePresenter?,
-    country: Country
-) : LegalEntityFields<CorporateOutput>(entity.toOutput()) {
+    output: CorporateOutput,
+    country: Country,
+    override val additional: List<AdditionalField> = kollections.emptyList()
+//    val additionalFcn: (output:AdditionalInfoOutput) -> List<Field<*, *>>
+) : LegalEntityFields<CorporateOutput>(output) {
+
+//    val additional = additionalFcn(output.additionalInfo)
 
     val name = name(output::name)
 

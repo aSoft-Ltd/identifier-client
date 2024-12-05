@@ -1,13 +1,17 @@
 package identifier.transformers
 
+import identifier.AdditionalInfo
 import identifier.CorporatePresenter
 import identifier.IndividualPresenter
+import identifier.fields.AdditionalInfoOutput
 import identifier.fields.CorporateOutput
 import identifier.fields.IndividualOutput
 import identifier.primaryContact
 import identifier.primaryEmail
 import identifier.primaryPhone
 import kollections.firstOrNull
+import kollections.toMap
+import kollections.toMutableMap
 
 fun CorporatePresenter?.toOutput() = CorporateOutput(
     src = this,
@@ -26,5 +30,14 @@ fun CorporatePresenter?.toOutput() = CorporateOutput(
     contactPhone = this?.primaryContact?.phones?.firstOrNull()?.toOutput(),
     numberOfEmployees = null,
     contactRole = this?.primaryContact?.role,
-    contactTitle = null
+    contactTitle = null,
+    additionalInfo = this?.src?.additionalInfo?.toOutput() ?: AdditionalInfoOutput()
+)
+
+fun AdditionalInfo.toOutput() = AdditionalInfoOutput(
+    date = date.toMap().toMutableMap(),
+    time = time.toMap().toMutableMap(),
+    string = string.toMap().toMutableMap(),
+    int = int.toMap().toMutableMap(),
+    double = double.toMap().toMutableMap()
 )

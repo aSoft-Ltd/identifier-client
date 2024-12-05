@@ -18,5 +18,6 @@ class IndividualOutput(
     var location: GeoLocation?,
     var address: String?,
     var idType: DocumentType?,
-    var idNumber: String?
+    var idNumber: String?,
+    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput()
 )

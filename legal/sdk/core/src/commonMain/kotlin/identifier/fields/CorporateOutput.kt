@@ -1,6 +1,7 @@
 package identifier.fields
 
 import geo.GeoLocation
+import identifier.AdditionalInfo
 import identifier.CorporatePresenter
 import identifier.CorporateType
 import identifier.Industry
@@ -25,4 +26,5 @@ class CorporateOutput(
     var contactRole: String?,
     var contactTitle: String?,
     var numberOfEmployees: Int?,
+    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput()
 )

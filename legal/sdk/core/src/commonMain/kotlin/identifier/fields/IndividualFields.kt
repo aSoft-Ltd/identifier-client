@@ -9,12 +9,14 @@ import identifier.DocumentType
 import identifier.Gender
 import identifier.IndividualPresenter
 import identifier.transformers.toOutput
+import kollections.List
 import kollections.minus
 import kollections.toList
 import kollections.toSet
 import kotlinx.JsExport
 import krono.date
 import neat.required
+import symphony.Field
 import symphony.Option
 import symphony.email
 import symphony.name
@@ -25,8 +27,10 @@ import symphony.toOption
 
 class IndividualFields(
     override val entity: IndividualPresenter?,
-    country: Country
-) : LegalEntityFields<IndividualOutput>(entity.toOutput()) {
+    output: IndividualOutput,
+    country: Country,
+    override val additional: List<AdditionalField> = kollections.emptyList()
+) : LegalEntityFields<IndividualOutput>(output) {
     val name = name(name = output::name) { required() }
 
     val title = selectSingle(

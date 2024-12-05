@@ -1,5 +1,6 @@
 package identifier.transformers
 
+import identifier.AdditionalInfo
 import identifier.IndividualDto
 import identifier.IndividualPresenter
 import identifier.params.IndividualParams
@@ -37,5 +38,6 @@ fun IndividualDto?.toParams() = IndividualParams(
     idDocumentNumber = this?.idDocumentNumber,
     idDocumentType = this?.idDocumentType,
     location = this?.location,
-    address = this?.address
+    address = this?.address,
+    additionalInfo = this?.additionalInfo ?: AdditionalInfo()
 )

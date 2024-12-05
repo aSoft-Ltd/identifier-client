@@ -1,5 +1,6 @@
 package identifier.transformers
 
+import identifier.AdditionalInfo
 import identifier.CorporateDto
 import identifier.CorporatePresenter
 import identifier.params.CorporateParams
@@ -20,7 +21,8 @@ fun CorporateDto?.toParams() = CorporateParams(
     vat = this?.vatNo,
     website = this?.website,
     hqLocation = this?.headQuarters?.location,
-    businessType = this?.type
+    businessType = this?.type,
+    additionalInfo = this?.additionalInfo ?: AdditionalInfo()
 )
 
 fun CorporateDto.toPresenter() = CorporatePresenter(
