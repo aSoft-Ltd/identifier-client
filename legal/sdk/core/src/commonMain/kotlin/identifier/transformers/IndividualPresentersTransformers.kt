@@ -17,4 +17,5 @@ fun IndividualPresenter?.toOutput() = IndividualOutput(
     address = this?.address,
     idType = this?.idDocumentType,
     idNumber = this?.idDocumentNumber,
+    category = this?.src?.category
 )

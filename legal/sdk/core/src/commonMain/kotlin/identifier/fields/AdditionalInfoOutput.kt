@@ -1,5 +1,6 @@
 package identifier.fields
 
+import identifier.FieldInfo
 import kollections.MutableMap
 import kollections.put
 import kollections.remove
@@ -25,6 +26,7 @@ data class AdditionalInfoOutput(
             is String -> string.put(field, value)
             is Int -> int.put(field, value)
             is Number -> double.put(field, value.toDouble())
+            is FieldInfo.Option -> string.put(field, value.value)
         }
     }
 }

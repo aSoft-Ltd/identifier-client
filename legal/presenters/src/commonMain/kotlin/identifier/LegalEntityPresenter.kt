@@ -17,6 +17,8 @@ sealed class LegalEntityPresenter {
     abstract val creditUsed: Double?
     abstract val leadTime: Int?
 
+    val synced get(): Boolean = src.synced
+
     val asIndividual get() = this as? IndividualPresenter
 
     val asCorporate get() = this as? CorporatePresenter

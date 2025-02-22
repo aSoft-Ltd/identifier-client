@@ -31,7 +31,8 @@ fun CorporatePresenter?.toOutput() = CorporateOutput(
     numberOfEmployees = null,
     contactRole = this?.primaryContact?.role,
     contactTitle = null,
-    additionalInfo = this?.src?.additionalInfo?.toOutput() ?: AdditionalInfoOutput()
+    additionalInfo = this?.src?.additionalInfo?.toOutput() ?: AdditionalInfoOutput(),
+    category = this?.src?.category
 )
 
 fun AdditionalInfo.toOutput() = AdditionalInfoOutput(

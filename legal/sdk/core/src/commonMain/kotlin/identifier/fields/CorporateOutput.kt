@@ -5,6 +5,7 @@ import identifier.AdditionalInfo
 import identifier.CorporatePresenter
 import identifier.CorporateType
 import identifier.Industry
+import identifier.LegalEntityCategory
 import krono.LocalDate
 import symphony.PhoneOutput
 
@@ -26,5 +27,6 @@ class CorporateOutput(
     var contactRole: String?,
     var contactTitle: String?,
     var numberOfEmployees: Int?,
-    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput()
+    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput(),
+    var category: LegalEntityCategory?
 )

@@ -4,6 +4,7 @@ import geo.GeoLocation
 import identifier.DocumentType
 import identifier.Gender
 import identifier.IndividualPresenter
+import identifier.LegalEntityCategory
 import krono.LocalDate
 import symphony.PhoneOutput
 
@@ -19,5 +20,6 @@ class IndividualOutput(
     var address: String?,
     var idType: DocumentType?,
     var idNumber: String?,
-    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput()
+    val additionalInfo: AdditionalInfoOutput = AdditionalInfoOutput(),
+    var category: LegalEntityCategory?
 )
